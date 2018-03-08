@@ -182,8 +182,6 @@ if (( base_mhz == 0 )); then
 fi
 set_mhz=$(x86info -mhz | awk '/estimate/ {print $1; exit}' | sed 's/[^1-9]//g')
 set_mhz=$(($set_mhz * 100))
-#set_mhz=$(awk '/^cpu MHz/ { print $NF; exit }' /proc/cpuinfo)
-#set_mhz=${set_mhz%.*}
 turbos=""
 ratios=""
 last=0
