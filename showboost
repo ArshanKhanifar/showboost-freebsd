@@ -180,8 +180,8 @@ if (( base_mhz == 0 )); then
 	# if this happens, switch to MSR_PLATFORM_INFO or CPUID
 	exit 1
 fi
-set_mhz=$(x86info -mhz | awk '/estimate/ {print $1; exit}' | sed 's/[^1-9]//g')
-set_mhz=$(($set_mhz * 100))
+set_ghz=$(x86info -mhz | awk '/estimate/ {print $1; exit}' | sed 's/0[^0-9]*$//g')
+set_mhz=$(awk -vp=$set_ghz -vq=1000 'BEGIN { printf "%.0f", p * q }')
 turbos=""
 ratios=""
 last=0
